@@ -8,8 +8,22 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-export default {
-	async fetch(request, env, ctx) {
-		return new Response('Hello World!');
-	},
-};
+import { Hono } from "hono";
+import notes from './routes/notes';
+import vectors from './routes/vectors';
+
+const app = new Hono();
+
+app.route('/notes', notes);
+app.route('/vectors', vectors);
+
+app.get('/', (c) => {
+	return c.text('Hello World');
+});
+
+app.onError((err, c) => {
+	console.error('Application error:', err);
+	return c.text(err.message || 'Internal Server Error', 500);
+});
+
+export default app;

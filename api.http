@@ -1,0 +1,31 @@
+@domain = http://localhost:8787
+
+### Get AI Response
+GET {{domain}}/
+
+### Get all notes
+GET {{domain}}/notes/all
+
+### Ask a question
+GET {{domain}}/notes?text=What is the square root of 9?
+Content-Type: application/json
+
+### Create a new note
+POST {{domain}}/notes
+Content-Type: application/json
+
+{
+    "text": "This is a sample note that will be processed by the RAG workflow"
+}
+
+###
+
+DELETE {{domain}}/notes/8
+
+
+### Get all vectors
+GET {{domain}}/vectors/all
+
+### Get a vector by ID
+GET {{domain}}/vectors/1
+
